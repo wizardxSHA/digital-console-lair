@@ -57,6 +57,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        terminal: {
+          cursor: "hsl(var(--terminal-cursor))",
+          selection: "hsl(var(--terminal-selection))",
+          prompt: "hsl(var(--terminal-prompt))",
+          command: "hsl(var(--terminal-command))",
+          output: "hsl(var(--terminal-output))",
+          error: "hsl(var(--terminal-error))",
+          success: "hsl(var(--terminal-success))",
+          warning: "hsl(var(--terminal-warning))",
+          glow: "hsl(var(--terminal-glow))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
