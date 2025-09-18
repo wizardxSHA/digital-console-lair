@@ -196,48 +196,61 @@ Type 'help' to see available commands or 'about' to learn more about me.
   }, []);
 
   return (
-    <div 
-      className={`min-h-screen bg-background p-4 ${className}`}
-      onClick={() => inputRef.current?.focus()}
-    >
+    <>
+      <div className="matrix-bg" />
       <div 
-        ref={terminalRef}
-        className="max-w-6xl mx-auto bg-card/50 backdrop-blur-sm border border-border rounded-none p-6 h-[calc(100vh-2rem)] overflow-y-auto scrollbar-hidden"
+        className={`min-h-screen flex items-center justify-center p-4 ${className || ''}`}
+        onClick={() => inputRef.current?.focus()}
       >
-        {/* Terminal Header */}
-        <div className="flex items-center justify-between mb-4 pb-2 border-b border-border">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 rounded-full bg-destructive"></div>
-            <div className="w-3 h-3 rounded-full bg-accent"></div>
-            <div className="w-3 h-3 rounded-full bg-primary"></div>
+        <div className="terminal-container w-full max-w-4xl mx-auto">
+          {/* Terminal Header */}
+          <div className="terminal-header">
+            <div className="terminal-title">
+              {portfolioData.name} - Cybersecurity Portfolio Terminal
+            </div>
+            <div className="terminal-dots">
+              <div className="terminal-dot terminal-dot-red"></div>
+              <div className="terminal-dot terminal-dot-yellow"></div>
+              <div className="terminal-dot terminal-dot-green"></div>
+            </div>
           </div>
-          <div className="text-muted-foreground text-sm">cybersec-portfolio — terminal</div>
-        </div>
 
-        {/* Terminal Content */}
-        <div className="space-y-1">
-          {lines.map((line, index) => (
-            <TerminalLine key={index} {...line} />
-          ))}
-          
-          {!isTyping && (
-            <form onSubmit={handleSubmit} className="terminal-line">
-              <span className="terminal-prompt">visitor@cybersec-portfolio:~$ </span>
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                className="terminal-input"
-                spellCheck={false}
-                autoComplete="off"
-              />
-              <span className="terminal-cursor"></span>
-            </form>
-          )}
+          {/* Terminal Content */}
+          <div 
+            ref={terminalRef}
+            className="terminal-content scrollbar-hidden"
+          >
+            {isTyping && (
+              <div className="terminal-welcome">
+                <div className="typing-animation">
+                  Initializing secure connection...
+                </div>
+              </div>
+            )}
+
+            {lines.map((line, index) => (
+              <TerminalLine key={index} {...line} />
+            ))}
+            
+            {!isTyping && (
+              <form onSubmit={handleSubmit} className="terminal-line">
+                <span className="terminal-prompt">visitor@cybersec-portfolio:~$ </span>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="terminal-input"
+                  spellCheck={false}
+                  autoComplete="off"
+                />
+                <span className="terminal-cursor"></span>
+              </form>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
