@@ -202,7 +202,7 @@ Type 'help' to see available commands or 'about' to learn more about me.
         className={`min-h-screen flex items-center justify-center p-4 ${className || ''}`}
         onClick={() => inputRef.current?.focus()}
       >
-        <div className="terminal-container w-full max-w-4xl mx-auto">
+        <div className="terminal-container w-full max-w-6xl mx-auto">
           {/* Terminal Header */}
           <div className="terminal-header">
             <div className="terminal-title">
