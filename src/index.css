@@ -285,18 +285,37 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                hsl(120 100% 60% / 0.15) 0%, 
-                hsl(180 100% 65% / 0.1) 25%, 
-                transparent 50%);
-    animation: pulseGlow 4s ease-in-out infinite alternate;
+    background: 
+      radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                      hsl(120 100% 60% / 0.4) 0%, 
+                      hsl(180 100% 65% / 0.3) 20%, 
+                      hsl(45 100% 65% / 0.2) 40%,
+                      transparent 70%),
+      radial-gradient(circle at calc(var(--mouse-x, 50%) + 20%) calc(var(--mouse-y, 50%) - 10%), 
+                      hsl(180 100% 65% / 0.2) 0%, 
+                      transparent 50%),
+      radial-gradient(circle at calc(var(--mouse-x, 50%) - 15%) calc(var(--mouse-y, 50%) + 15%), 
+                      hsl(45 100% 65% / 0.15) 0%, 
+                      transparent 40%);
+    animation: pulseGlow 3s ease-in-out infinite alternate;
+    filter: blur(20px);
+    transition: all 0.3s ease;
     z-index: -1;
-    opacity: 0.05;
-    background-image: 
-      radial-gradient(circle at 20% 80%, hsl(var(--primary)) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(var(--secondary)) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, hsl(var(--accent)) 0%, transparent 50%);
-    animation: matrixFloat 20s ease-in-out infinite;
+    opacity: 0.8;
+  }
+
+  .matrix-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at calc(100% - var(--mouse-x, 50%)) calc(100% - var(--mouse-y, 50%)), 
+                      hsl(300 100% 60% / 0.15) 0%, 
+                      transparent 50%);
+    animation: pulseGlow 4s ease-in-out infinite alternate-reverse;
   }
 }
 
