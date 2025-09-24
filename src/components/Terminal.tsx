@@ -152,11 +152,22 @@ To restart the terminal, refresh the page.`,
     }
   };
 
-  // Auto-focus input
+  // Auto-focus input and setup mouse tracking
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
+
+    // Mouse tracking for interactive background
+    const handleMouseMove = (event: MouseEvent) => {
+      const x = (event.clientX / window.innerWidth) * 100;
+      const y = (event.clientY / window.innerHeight) * 100;
+      document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+      document.documentElement.style.setProperty('--mouse-y', `${y}%`);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   // Scroll to bottom when new lines are added
