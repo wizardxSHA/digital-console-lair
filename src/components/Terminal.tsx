@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, Suspense } from 'react';
 import { TerminalLine } from './TerminalLine';
+import { Scene3D } from './Scene3D';
 import { useTerminalHistory } from '../hooks/useTerminalHistory';
 import { portfolioData } from '../data/portfolioData';
 
@@ -213,7 +214,7 @@ Type 'help' to see available commands or 'about' to learn more about me.
         className={`min-h-screen flex items-center justify-center p-4 ${className || ''}`}
         onClick={() => inputRef.current?.focus()}
       >
-        <div className="terminal-container w-full max-w-6xl mx-auto">
+        <div className="terminal-container w-full max-w-7xl mx-auto">
           {/* Terminal Header */}
           <div className="terminal-header">
             <div className="terminal-title">
@@ -226,39 +227,53 @@ Type 'help' to see available commands or 'about' to learn more about me.
             </div>
           </div>
 
-          {/* Terminal Content */}
-          <div 
-            ref={terminalRef}
-            className="terminal-content scrollbar-hidden"
-          >
-            {isTyping && (
-              <div className="terminal-welcome">
-                <div className="typing-animation">
-                  Initializing secure connection...
+          {/* Terminal Content Container */}
+          <div className="flex h-[600px]">
+            {/* Terminal Content - Left Side */}
+            <div 
+              ref={terminalRef}
+              className="terminal-content scrollbar-hidden flex-1"
+            >
+              {isTyping && (
+                <div className="terminal-welcome">
+                  <div className="typing-animation">
+                    Initializing secure connection...
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {lines.map((line, index) => (
-              <TerminalLine key={index} {...line} />
-            ))}
-            
-            {!isTyping && (
-              <form onSubmit={handleSubmit} className="terminal-line">
-                <span className="terminal-prompt">visitor@cybersec-portfolio:~$ </span>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="terminal-input"
-                  spellCheck={false}
-                  autoComplete="off"
-                />
-                <span className="terminal-cursor"></span>
-              </form>
-            )}
+              {lines.map((line, index) => (
+                <TerminalLine key={index} {...line} />
+              ))}
+              
+              {!isTyping && (
+                <form onSubmit={handleSubmit} className="terminal-line">
+                  <span className="terminal-prompt">visitor@cybersec-portfolio:~$ </span>
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    className="terminal-input"
+                    spellCheck={false}
+                    autoComplete="off"
+                  />
+                  <span className="terminal-cursor"></span>
+                </form>
+              )}
+            </div>
+
+            {/* 3D Scene - Right Side */}
+            <div className="w-1/3 border-l border-terminal-border/30 relative bg-gradient-to-br from-terminal-bg to-background/50">
+              <Suspense fallback={
+                <div className="flex items-center justify-center h-full text-terminal-text/50 text-sm">
+                  <div className="animate-pulse">Loading 3D Scene...</div>
+                </div>
+              }>
+                <Scene3D />
+              </Suspense>
+            </div>
           </div>
         </div>
       </div>

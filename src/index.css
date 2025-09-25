@@ -6,47 +6,49 @@
 
 @layer base {
   :root {
-    /* Dark cybersecurity theme */
-    --background: 220 15% 3%;          /* Deeper space black */
-    --foreground: 120 100% 85%;        /* Brighter matrix green */
+    /* Dark cybersecurity theme - matching reference */
+    --background: 220 15% 2%;          /* Very dark background like reference */
+    --foreground: 210 40% 98%;         /* Light text */
 
-    --card: 220 15% 5%;                /* Subtle card background */
-    --card-foreground: 120 100% 85%;
+    --card: 220 15% 3%;                /* Slightly lighter card background */
+    --card-foreground: 210 40% 98%;
 
-    --popover: 220 15% 4%;
-    --popover-foreground: 120 100% 85%;
+    --popover: 220 15% 3%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 120 100% 60%;           /* Vibrant matrix green */
-    --primary-foreground: 220 15% 3%;
+    --primary: 199 89% 48%;            /* Blue like in reference */
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 180 100% 65%;         /* Electric cyan */
-    --secondary-foreground: 220 15% 3%;
+    --secondary: 142 76% 36%;          /* Green for directories */
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 120 40% 20%;              /* Sophisticated dim green */
-    --muted-foreground: 120 60% 70%;
+    --muted: 220 15% 8%;               /* Muted background */
+    --muted-foreground: 220 10% 60%;
 
-    --accent: 45 100% 65%;             /* Electric amber */
-    --accent-foreground: 220 15% 3%;
+    --accent: 46 87% 65%;              /* Yellow/orange accent */
+    --accent-foreground: 220 15% 2%;
 
-    --destructive: 0 85% 65%;          /* Elegant red */
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 75% 60%;          /* Error red */
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 120 40% 20%;
-    --input: 220 15% 6%;
-    --ring: 120 100% 60%;
+    --border: 220 13% 18%;             /* Dark border */
+    --input: 220 13% 18%;
+    --ring: 199 89% 48%;
 
-    --radius: 0.25rem;                 /* Subtle rounded corners */
+    --radius: 0.5rem;
 
-    /* Enhanced terminal colors with gradients */
-    --terminal-cursor: 120 100% 85%;
-    --terminal-selection: 120 60% 25%;
-    --terminal-prompt: 180 100% 75%;
-    --terminal-command: 120 100% 85%;
-    --terminal-output: 120 85% 75%;
-    --terminal-error: 0 85% 65%;
-    --terminal-success: 120 100% 60%;
-    --terminal-warning: 45 100% 65%;
-    --terminal-glow: 120 100% 60%;
+    /* Terminal-specific colors - matching reference syntax highlighting */
+    --terminal-bg: 220 15% 1%;         /* Very dark terminal bg */
+    --terminal-border: 199 89% 48%;    /* Blue border */
+    --terminal-text: 210 40% 98%;      /* White text */
+    --terminal-prompt: 142 76% 36%;    /* Green prompt */
+    --terminal-command: 199 89% 48%;   /* Blue commands */
+    --terminal-output: 210 30% 85%;    /* Light gray output */
+    --terminal-error: 0 75% 65%;       /* Red errors */
+    --terminal-success: 142 76% 50%;   /* Green success */
+    --terminal-warning: 46 87% 65%;    /* Yellow warnings */
+    --terminal-accent: 271 91% 65%;    /* Purple accent */
+    --terminal-glow: 199 89% 48%;      /* Blue glow */
 
     /* Gradients and effects */
     --gradient-primary: linear-gradient(135deg, hsl(120 100% 60%), hsl(120 100% 45%));
@@ -131,17 +133,22 @@
 @layer components {
   .terminal-container {
     @apply relative;
-    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--background)) 100%);
-    border: 1px solid hsl(var(--border));
-    border-radius: var(--radius);
+    background: linear-gradient(135deg, 
+      hsl(var(--terminal-bg)) 0%, 
+      hsl(220 15% 3%) 100%);
+    border: 1px solid hsl(var(--terminal-border) / 0.6);
+    border-radius: 8px;
     box-shadow: 
-      var(--shadow-terminal),
-      0 0 100px hsl(120 100% 60% / 0.2),
-      0 0 200px hsl(180 100% 65% / 0.1);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    animation: borderPulse 6s ease-in-out infinite;
+      0 0 40px hsl(var(--terminal-glow) / 0.4),
+      0 0 80px hsl(var(--terminal-glow) / 0.2),
+      0 0 120px hsl(142 76% 36% / 0.1),
+      inset 0 1px 0 hsl(var(--terminal-border) / 0.2);
+    backdrop-filter: blur(15px);
+    position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
+    animation: terminalGlow 3s ease-in-out infinite alternate;
+    display: flex;
   }
 
   .terminal-container::before {
