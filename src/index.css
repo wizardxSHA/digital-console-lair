@@ -147,41 +147,9 @@
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
-    animation: terminalGlow 3s ease-in-out infinite alternate;
     display: flex;
   }
 
-  .terminal-container::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, 
-      hsl(120 100% 60% / 0.3), 
-      hsl(180 100% 65% / 0.3), 
-      hsl(45 100% 65% / 0.3), 
-      hsl(120 100% 60% / 0.3));
-    border-radius: var(--radius);
-    z-index: -1;
-    animation: borderRotate 8s linear infinite;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .terminal-container:hover::before {
-    opacity: 1;
-  }
-
-  .terminal-container:hover {
-    box-shadow: 
-      var(--shadow-terminal),
-      0 0 150px hsl(120 100% 60% / 0.3),
-      0 0 300px hsl(180 100% 65% / 0.15),
-      0 0 50px hsl(45 100% 65% / 0.2);
-    transform: translateY(-2px);
-  }
   
   .terminal-header {
     @apply flex items-center justify-between p-4 border-b;
