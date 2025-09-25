@@ -265,7 +265,7 @@ Type 'help' to see available commands or 'about' to learn more about me.
             </div>
 
             {/* 3D Scene - Right Side */}
-            <div className="w-1/3 border-l border-terminal-border/30 relative bg-gradient-to-br from-terminal-bg to-background/50">
+            <div className="w-1/3 relative bg-gradient-to-br from-terminal-bg to-background/50">
               <Suspense fallback={
                 <div className="flex items-center justify-center h-full text-terminal-text/50 text-sm">
                   <div className="animate-pulse">Loading 3D Scene...</div>
